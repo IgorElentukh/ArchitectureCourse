@@ -535,7 +535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7077538880465408488, guid: b86ea12233a66894fb6eb924e4ca7da4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -668,6 +668,10 @@ PrefabInstance:
     - target: {fileID: 2654116497760865239, guid: 8794a3cd9edc1fd4688542324bb2763d, type: 3}
       propertyPath: m_Name
       value: Gun-3-20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654116497760865239, guid: 8794a3cd9edc1fd4688542324bb2763d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3537404280862402801, guid: 8794a3cd9edc1fd4688542324bb2763d, type: 3}
       propertyPath: m_LocalPosition.x

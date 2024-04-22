@@ -256,6 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef98f92403566a41910bb1801b1319b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3115634313773622652, guid: 2a4586d5b2371b642a7e40f3addd8f81, type: 3}
-  spawnPosition: {fileID: 1265411819417151940}
-  ammoCount: 10
+  _bulletPrefab: {fileID: 3115634313773622652, guid: 2a4586d5b2371b642a7e40f3addd8f81, type: 3}
+  _spawnPosition: {fileID: 1265411819417151940}
+  _ammoCount: 10
