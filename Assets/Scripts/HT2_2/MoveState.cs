@@ -2,42 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveState : ActivityState
+namespace StatePattern
 {
-    [SerializeField] private Places _homePlace;
-    [SerializeField] private Places _workPlace;
-    
-    public MoveState(IStateSwitcher stateSwitcher, StateMachineData data, Player player) : base(stateSwitcher, data, player)
+    public class MoveState : IState
     {
-        StateDuration = 4f;
-    }
+        private IStateSwitcher _stateSwitcher;
+        private StateMachineData _data;
+        private Player _player;
+        private float _speed;
 
-    public override void Enter()
-    {
-        base.Enter();
-
-        Debug.Log("Выхожу");
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        Debug.Log("Привет, коллеги!");
-    }
-
-    public override void Update()
-    {
-        float t = 0;
-        float d = 0;
-
-        while (t <= StateDuration)
+        public MoveState(IStateSwitcher stateSwitcher, StateMachineData data, Player player)
         {
-            Debug.Log("Иду на работу");
-            t += Time.deltaTime;
-            d = t / StateDuration;
+            _stateSwitcher = stateSwitcher;
+            _data = data;
+            _player = player;
+            _speed = _data.Speed;
+        }
 
-            
+        public  void Enter()
+        {
+            Debug.Log("Выхожу");
+            _speed = 0.5f;
+        }
+
+        public  void Exit()
+        { 
+            _speed = 0f;
+        }
+
+        public void Update()
+        {
+            Vector3 direction = _data.TargetPosition - _player.transform.position;
+            _player.transform.Translate(direction * _speed * Time.deltaTime);
+
+            if (direction.sqrMagnitude < 1f)
+            {
+                if (_data.TargetPosition == _player.WorkPoint.position)
+                    _stateSwitcher.SwitchState<WorkingState>();
+                else if (_data.TargetPosition == _player.HomePoint.position)
+                    _stateSwitcher.SwitchState<RestState>();
+            }
+                
         }
     }
 }

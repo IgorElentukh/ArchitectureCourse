@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class HomePlace : Places
 {
-    private void Awake()
+    private void Start()
     {
         Name = "Дом";
-        Position = transform.position;
-
-        Debug.Log(Name + Position);
     }
 
     public override void ActivityAtPlace()
     {
-        Debug.Log($"{Name}. Отдыхаю");
+        Debug.Log($"{Name}. Отдыхаю"); 
     }
 }

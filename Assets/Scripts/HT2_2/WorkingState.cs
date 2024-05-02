@@ -2,26 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkingState : ActivityState
+namespace StatePattern
 {
-    public WorkingState(IStateSwitcher stateSwitcher, StateMachineData data, Player player) : base(stateSwitcher, data, player)
+    public class WorkingState : ActivityState
     {
-        StateDuration = 8f;
-        Place = new WorkPlace();
+        public WorkingState(IStateSwitcher stateSwitcher, StateMachineData data, Player player) : base(stateSwitcher, data, player, 8)
+        {
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+
+            Debug.Log("Начинаю работать");
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            Debug.Log("Пора домой");
+        }
+
+        protected override void OnTimeEnded()
+        {
+            Data.TargetPosition = Player.HomePoint.position;
+            StateSwitcher.SwitchState<MoveState>();
+        }
     }
-
-    public override void Enter()
-    {
-        base.Enter();
-
-        Debug.Log("Начинаю работать");
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        Debug.Log("Пора домой");
-    }
-
 }

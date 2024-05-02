@@ -2,21 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StateMachine
+
+namespace StatePattern
 {
     public class Player : MonoBehaviour
     {
         private PlayerStateMachine _stateMachine;
 
-        private void Awake()
+        public void Initialize(Transform homePoint, Transform workPoint)
         {
-            _stateMachine = new PlayerStateMachine();
+            HomePoint = homePoint;
+            WorkPoint = workPoint;
+            
+            _stateMachine = new PlayerStateMachine(this);
+           
         }
+
+        public Transform HomePoint { get; private set; }
+        public Transform WorkPoint { get; private set; }
 
         private void Update()
         {
-            _stateMachine.HandleInput();
             _stateMachine.Update();
         }
     }
 }
+

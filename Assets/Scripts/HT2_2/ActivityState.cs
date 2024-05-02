@@ -2,48 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivityState : IState
+namespace StatePattern
 {
-    protected readonly IStateSwitcher StateSwitcher;
-    protected readonly StateMachineData Data;
-
-    protected float StateDuration;
-    protected Places Place;
-
-    protected readonly Player Player;
-
-    public ActivityState(IStateSwitcher stateSwitcher, StateMachineData data, Player player)
+    public abstract class ActivityState : IState
     {
-        StateSwitcher = stateSwitcher;
-        Player = player;
-        Data = data;
-    }
+        protected readonly IStateSwitcher StateSwitcher;
+        protected readonly StateMachineData Data;
 
-    public virtual void Enter()
-    {
-        Debug.Log(GetType());
-    }
+        private float StateDuration;
+        protected Places Place;
 
-    public virtual void Exit()
-    {
-        
-    }
+        protected readonly Player Player;
 
-    public void HandleInput()
-    {
-        throw new System.NotImplementedException();
-    }
+        private float t = 0;
 
-    public virtual void Update()
-    {
-        float t = 0;
-        
-        while (t <= StateDuration)
+        public ActivityState(IStateSwitcher stateSwitcher, StateMachineData data, Player player, float stateDuration)
         {
-            Place.ActivityAtPlace();
-            t += Time.deltaTime;
+            StateSwitcher = stateSwitcher;
+            Player = player;
+            Data = data;
+            StateDuration = stateDuration;
         }
-        
-        Exit();
+
+        public virtual void Enter()
+        {
+            Debug.Log(GetType());
+            t = 0;
+        }
+
+        public virtual void Exit()
+        {
+
+        }
+
+
+        public virtual void Update()
+        {
+            t += Time.deltaTime;
+            if (t>= StateDuration)
+            OnTimeEnded();
+        }
+
+        protected abstract void OnTimeEnded();
     }
 }

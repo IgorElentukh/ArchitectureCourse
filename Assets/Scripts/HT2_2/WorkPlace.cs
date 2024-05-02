@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class WorkPlace : Places
 {
-    private void Awake()
+    private void Start()
     {
         Name = "Работа";
-        Position = transform.position;
-
-        Debug.Log(Name + Position);
     }
 
     public override void ActivityAtPlace()

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class StateMachineData
 {
+    public Vector3 TargetPosition;
+    
     private float _speed;
 
     public float Speed 
