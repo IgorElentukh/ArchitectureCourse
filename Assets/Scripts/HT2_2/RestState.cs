@@ -6,7 +6,7 @@ namespace StatePattern
 {
     public class RestState : ActivityState
     {
-        public RestState(IStateSwitcher stateSwitcher, StateMachineData data, Player player) : base(stateSwitcher, data, player, 8)
+        public RestState(IStateSwitcher stateSwitcher, StateMachineData data, Player player) : base(stateSwitcher, data, player, 5)
         {
 
         }

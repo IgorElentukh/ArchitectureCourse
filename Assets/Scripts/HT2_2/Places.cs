@@ -10,7 +10,6 @@ public abstract class Places : MonoBehaviour
     protected virtual void Awake()
     {
         Position = transform.position;
-        Debug.Log(Position);
     }
 
 

@@ -22,7 +22,7 @@ namespace StatePattern
         public  void Enter()
         {
             Debug.Log("Выхожу");
-            _speed = 0.5f;
+            _speed = 8f;
         }
 
         public  void Exit()
@@ -33,7 +33,7 @@ namespace StatePattern
         public void Update()
         {
             Vector3 direction = _data.TargetPosition - _player.transform.position;
-            _player.transform.Translate(direction * _speed * Time.deltaTime);
+            _player.transform.Translate(direction.normalized * _speed * Time.deltaTime);
 
             if (direction.sqrMagnitude < 1f)
             {
