@@ -13,10 +13,12 @@ namespace FactoryCoins
         [SerializeField] private CoinFactory _coinFactory;
 
         private Coroutine _spawn;
+        public List<Transform> _availablePoints;
+
         public void StartWork()
         {
             StopWork();
-
+            _availablePoints = new List<Transform>(_spawnPoints);
             _spawn = StartCoroutine(Spawn());
         }
 
@@ -26,13 +28,24 @@ namespace FactoryCoins
                 StopCoroutine(_spawn);
         }
 
+        private Vector3 ChooseSpawnPoint()
+        {
+            Transform choosenPoint = _availablePoints[Random.Range(0, _availablePoints.Count)];
+            _availablePoints.Remove(choosenPoint);
+
+            if (_availablePoints.Count == 0)
+                _availablePoints = _spawnPoints;
+
+            return choosenPoint.position;
+        }
+
         private IEnumerator Spawn()
         {
             while (true)
             {
                 CoinType coinType = (CoinType)Random.Range(0, Enum.GetValues(typeof(CoinType)).Length);
                 Coin coin = _coinFactory.GetCoin(coinType);
-                coin.MoveTo(_spawnPoints);
+                coin.MoveTo(ChooseSpawnPoint());
                 yield return new WaitForSeconds(_spawnCooldown);
             }
         }

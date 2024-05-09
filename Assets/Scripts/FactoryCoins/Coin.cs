@@ -5,9 +5,9 @@ namespace FactoryCoins
 {
     public abstract class Coin : MonoBehaviour
     {
-        public void MoveTo(IEnumerable<Transform> points)
+        public void MoveTo(Vector3 point)
         {
-            List<Transform> transforms = new List<Transform>(points);
+            transform.position = point;    
         }
         
         private void OnTriggerEnter(Collider other)
